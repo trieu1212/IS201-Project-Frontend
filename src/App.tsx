@@ -1,17 +1,18 @@
 
 import './App.css'
 import {Route,Routes} from 'react-router-dom'
-import Header from './components/Header/Header'
-import Login from './pages/Login/Login'
-import Home from './pages/Home/Home'
+import {Public,Home,Login,Register} from './pages/Public'
+import { Path } from './ultils/Path'
 function App() {
 
   return (
     <>
-      <Header/>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/login' element={<Login/>}/>
+        <Route path={Path.PUBLIC} element={<Public/>}>
+          <Route path={Path.HOME} element={<Home/>}/>
+        </Route>
+        <Route path={Path.LOGIN} element={<Login/>}/>
+        <Route path={Path.REGISTER} element={<Register/>}/>
       </Routes>
     </>
   )
