@@ -1,11 +1,12 @@
 import React from 'react'
 import logo from '../assets/images/logo.svg'
 import { Icons } from '../ultils/Icons'
-import { IconType } from 'react-icons'
 import Button from './Button'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 const Header = () => {
     const { FaUserPlus, FaRegHeart, FaRegArrowAltCircleRight, CiCirclePlus } = Icons
+    const { user } = useSelector((state: any) => state.app)
     return (
         <>
             <div className='flex justify-between items-center w-[1100px] mx-auto p-4'>
@@ -17,18 +18,21 @@ const Header = () => {
                         <FaRegHeart size={20} />
                         <span>Yêu thích</span>
                     </span>
-                    <span className='flex items-center' >
-                        <Link to='/login' className='flex items-center gap-2 hover:underline'>
-                            <FaUserPlus size={20} />
-                            <span>Đăng nhập</span>
-                        </Link>
-                    </span>
-                    <span className='flex items-center gap-2'>
-                        <Link to='/register' className='flex items-center gap-2 hover:underline'>
-                            <FaRegArrowAltCircleRight size={20} />
-                            <span>Đăng ký</span>
-                        </Link>
-                    </span>
+                    {!user && <div className='flex gap-4'>
+                        <span className='flex items-center' >
+                            <Link to='/login' className='flex items-center gap-2 hover:underline'>
+                                <FaUserPlus size={20} />
+                                <span>Đăng nhập</span>
+                            </Link>
+                        </span>
+                        <span className='flex items-center gap-2'>
+                            <Link to='/register' className='flex items-center gap-2 hover:underline'>
+                                <FaRegArrowAltCircleRight size={20} />
+                                <span>Đăng ký</span>
+                            </Link>
+                        </span>
+                    </div>}
+                    {user && <div className='flex items-center'>Xin chào, <span className='font-semibold ml-1'> {user?.username}</span></div>  }
                     <span>
                         <Button
                             name='Đăng tin miễn phí'
