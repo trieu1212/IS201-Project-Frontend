@@ -1,14 +1,18 @@
 import React from 'react'
 import { Button, InputField } from '../../components'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { authApis } from '../../apis/AuthApis'
 import { RegisterUser } from '../../types/RegisterUser'
+import Swal from 'sweetalert2'
+import { toast } from 'react-toastify'
+
 
 const Register = () => {
   const [username, setUsername] = React.useState<string>('')
   const [email, setEmail] = React.useState<string>('')
   const [phone, setPhone] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
+  const navigate = useNavigate()
   const handleRegister = async() =>{
     const data:RegisterUser = {
       username,
@@ -17,7 +21,17 @@ const Register = () => {
       password
     }
     const response = await authApis.register(data)
-    console.log(response)
+    if(response.data.statusCode===201){
+      Swal.fire({
+        icon:'success',
+        title:response.data.message
+      }).then(()=>{
+        navigate('/login')
+      })
+    }
+    else{
+      toast.error(response.data.message)
+    }
   }
   return (
     <>
