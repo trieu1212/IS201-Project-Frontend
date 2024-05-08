@@ -1,12 +1,18 @@
 import React from 'react'
 import { Button, InputField } from '../../components'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { authApis } from '../../apis/AuthApis'
 import { LoginUser } from '../../types/LoginUser'
+import { useDispatch } from 'react-redux'
+import { loginSuccess } from '../../redux/slice/appSlice'
+import Swal from 'sweetalert2'
+import { toast } from 'react-toastify'
 
 const Login = () => {
   const [username, setUsername] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const handleLogin = async () => {
     const data: LoginUser = {
       username,
@@ -14,6 +20,18 @@ const Login = () => {
     }
     const response = await authApis.login(data)
     console.log(response)
+    if(response.status===201){
+      dispatch(loginSuccess(response.data))
+      Swal.fire({
+        icon:'success',
+        title:'Đăng nhập thành công!'
+      }).then(()=>{
+        navigate('/')
+      })
+    }
+    else{
+      toast.error('Đăng nhập thất bại!')
+    }
   }
   return (
     <>
