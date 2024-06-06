@@ -3,4 +3,7 @@ export const Path = {
     HOME: '/',
     LOGIN: '/login',
     REGISTER: '/register',
+    SERVICE: '/service',
+    PRIVATE: '/private',
+    PROFILE: 'profile',
 }

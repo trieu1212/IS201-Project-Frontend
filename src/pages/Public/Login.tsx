@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux'
 import { loginSuccess } from '../../redux/slice/appSlice'
 import Swal from 'sweetalert2'
 import { toast } from 'react-toastify'
-
 const Login = () => {
   const [username, setUsername] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
@@ -19,7 +18,6 @@ const Login = () => {
       password
     }
     const response = await authApis.login(data)
-    console.log(response)
     if(response.status===201){
       dispatch(loginSuccess(response.data))
       Swal.fire({

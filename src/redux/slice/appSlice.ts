@@ -19,10 +19,15 @@ const authSlice = createSlice({
             state.user = action.payload.user
             state.accessToken = action.payload.JWTToken.accessToken,
             state.refreshToken = action.payload.JWTToken.refreshToken
+        },
+        logoutSuccess:(state)=>{
+            state.user = null
+            state.accessToken = ''
+            state.refreshToken = ''
         }
     }
 })
 
 export default authSlice.reducer;
-export const {loginSuccess} = authSlice.actions;
+export const {loginSuccess,logoutSuccess} = authSlice.actions;
 

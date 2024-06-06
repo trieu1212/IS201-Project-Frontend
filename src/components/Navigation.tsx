@@ -6,12 +6,12 @@ const Navigation = () => {
         {
             id:1,
             name:'Trang chủ',
-            path:'/home'
+            path:'/'
         },
         {
             id:2,
-            name:'Tin tức',
-            path:'/news'
+            name:'Dịch vụ',
+            path:'/service'
         },
         {
             id:3,

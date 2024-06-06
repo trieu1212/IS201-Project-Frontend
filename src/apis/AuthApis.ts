@@ -11,5 +11,9 @@ export const authApis = {
         url:'/auth/login',
         method:'POST',
         data
+    }),
+    logout: async () => Axios({
+        url:'/auth/logout',
+        method:'POST',
     })
 }

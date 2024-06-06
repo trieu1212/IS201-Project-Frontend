@@ -2,16 +2,31 @@ import React from 'react'
 import logo from '../assets/images/logo.svg'
 import { Icons } from '../ultils/Icons'
 import Button from './Button'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { authApis } from '../apis/AuthApis'
+import { toast } from 'react-toastify'
+import { logoutSuccess } from '../redux/slice/appSlice'
+import { Path } from '../ultils/Path'
 const Header = () => {
     const { FaUserPlus, FaRegHeart, FaRegArrowAltCircleRight, CiCirclePlus } = Icons
     const { user } = useSelector((state: any) => state.app)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const handleLogout = async () => {
+        const response = await authApis.logout()
+        console.log(response)
+        if (response.status === 201) {
+            toast.success('Đăng xuất thành công')
+            dispatch(logoutSuccess())
+            navigate('/login')
+        }
+    }
     return (
         <>
             <div className='flex justify-between items-center w-[1100px] mx-auto p-4'>
                 <div>
-                    <img src={logo} alt="" className='h-[50px] object-cover' />
+                    <img src={logo} alt="" className='h-[50px] object-cover cursor-pointer' onClick={() => navigate('/')} />
                 </div>
                 <div className='flex gap-6'>
                     <span className='flex items-center gap-2'>
@@ -32,7 +47,24 @@ const Header = () => {
                             </Link>
                         </span>
                     </div>}
-                    {user && <div className='flex items-center'>Xin chào, <span className='font-semibold ml-1'> {user?.username}</span></div>  }
+                    {user &&
+                        <div className='flex items-center gap-4'>
+                            <span>
+                                Xin chào, <span className='font-semibold ml-1'>
+                                    <Link to='/private/profile'>
+                                        {user?.username}
+                                    </Link>
+                                </span>
+                            </span>
+                            <span
+                                className='flex items-center gap-2 hover:underline cursor-pointer'
+                                onClick={handleLogout}
+                            >
+                                <FaRegArrowAltCircleRight size={20} />
+                                <span>Đăng xuất</span>
+                            </span>
+                        </div>
+                    }
                     <span>
                         <Button
                             name='Đăng tin miễn phí'
