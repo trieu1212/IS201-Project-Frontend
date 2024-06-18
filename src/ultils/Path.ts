@@ -6,4 +6,5 @@ export const Path = {
     SERVICE: '/service',
     PRIVATE: '/private',
     PROFILE: 'profile',
+    DETAIL_POST: '/detail-post/:id',
 }

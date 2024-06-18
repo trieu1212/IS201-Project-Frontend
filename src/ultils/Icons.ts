@@ -9,6 +9,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { GiMoneyStack } from "react-icons/gi";
 import { AiOutlineColumnWidth } from "react-icons/ai";
 import { IoIosSearch } from "react-icons/io";
+import { IoMdArrowDropright } from "react-icons/io";
 export const Icons={
     FaRegHeart,
     FaUserPlus,
@@ -20,5 +21,6 @@ export const Icons={
     CiLocationOn,
     GiMoneyStack,
     AiOutlineColumnWidth,
-    IoIosSearch
+    IoIosSearch,
+    IoMdArrowDropright
 }

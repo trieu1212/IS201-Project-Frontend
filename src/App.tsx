@@ -1,7 +1,7 @@
 
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import { Public, Home, Login, Register, Service } from './pages/Public'
+import { Public, Home, Login, Register, Service, DetailPost } from './pages/Public'
 import { Path } from './ultils/Path'
 import { ToastContainer } from 'react-toastify'
 import { Private, Profile } from './pages/Private'
@@ -13,6 +13,7 @@ function App() {
         <Route path={Path.PUBLIC} element={<Public />}>
           <Route path={Path.HOME} element={<Home />} />
           <Route path={Path.SERVICE} element={<Service />} />
+          <Route path={Path.DETAIL_POST} element={<DetailPost/>} />
         </Route>
         <Route path={Path.PRIVATE} element={<Private />}>
           <Route path={Path.PROFILE} element={<Profile />} />

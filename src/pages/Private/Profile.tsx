@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 const Profile = () => {
   const { user } = useSelector((state: any) => state.app)
   const [type, setType] = React.useState<string>('Chỉnh sửa thông tin')
+
   return (
     <div className='w-[1100px] mx-auto flex gap-4 mt-4 '>
       <div className='w-[30%] p-6 bg-[#13308E] rounded-md text-white h-[250px]'>
@@ -30,15 +31,14 @@ const Profile = () => {
             <div className='mt-4'>
               <div className='flex gap-4'>
                 <div>
-                  <img src="https://via.placeholder.com/150" alt="" className='w-[150px] h-[150px] object-cover' />
+                  <img src="https://genk.mediacdn.vn/2018/2/16/photo-1-15187575078491091832460.jpg" alt="" className='w-[150px] h-[150px] object-cover' />
                 </div>
                 <div>
                   <h2 className='font-semibold text-[20px]'>
                     {user?.username}
                   </h2>
-                  <p className='text-[14px] text-[#333]'>Email:</p>
-                  <p className='text-[14px] text-[#333]'>Số điện thoại:</p>
-                  <p className='text-[14px] text-[#333]'>Địa chỉ:</p>
+                  <p className='text-[14px] text-[#333]'>Email: {user.email}</p>
+                  <p className='text-[14px] text-[#333]'>Số điện thoại: {user.phone}</p>
                 </div>
               </div>
             </div>
