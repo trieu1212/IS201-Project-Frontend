@@ -17,7 +17,8 @@ const Login = () => {
       username,
       password
     }
-    const response = await authApis.login(data)
+    try {
+      const response = await authApis.login(data)
     if(response.status===201){
       dispatch(loginSuccess(response.data))
       Swal.fire({
@@ -27,8 +28,12 @@ const Login = () => {
         navigate('/')
       })
     }
-    else{
-      toast.error('Đăng nhập thất bại!')
+    } catch (error:any) {
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('Lỗi server! Vui lòng thử lại sau!');
+      } 
     }
   }
   return (

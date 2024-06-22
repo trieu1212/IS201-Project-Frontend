@@ -35,7 +35,6 @@ const PostList: React.FC<QueryGetPost> = ({ itemPerPage, page, search, roomType,
         }
         getAllPost()
     }, [address, itemPerPage, page, roomType, search])
-    console.log(result)
     return (
         <div>
             {result?.data?.length === 0 && <p className='text-center text-[18px]'>Không có bài viết nào</p>}
@@ -63,12 +62,12 @@ const PostList: React.FC<QueryGetPost> = ({ itemPerPage, page, search, roomType,
             })}
             <div className='text-center'>
                 <button
-                    onClick={() => setPage(result?.prevPage || 1)}
+                    onClick={() => setPage && setPage(result?.prevPage || 1)}
                     disabled={result?.prevPage ? false : true}
                     className='bg-red-500 text-white px-4 py-2 rounded-md mt-4 mr-4 hover:bg-red-600'
                 >Prev</button>
                 <button
-                    onClick={() => setPage(result?.nextPage || 1)}
+                    onClick={() => setPage && setPage(result?.nextPage || 1)}
                     disabled={result?.nextPage ? false : true}
                     className='bg-red-500 text-white px-4 py-2 rounded-md mt-4 hover:bg-red-600'
                 >Next</button>
