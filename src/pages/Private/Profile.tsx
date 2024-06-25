@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { OrderApis } from '../../apis/OrderApis'
 
 const Profile = () => {
   const { user } = useSelector((state: any) => state.app)
   const [type, setType] = React.useState<string>('Chỉnh sửa thông tin')
-
+  const [orders, setOrders] = React.useState<any[]>([])
+  useEffect(()=>{
+    const getAllOrder = async() => {
+      const res = await OrderApis.getAll()
+      setOrders(res.data)
+    }
+    getAllOrder()
+  },[])
   return (
     <div className='w-[1100px] mx-auto flex gap-4 mt-4 '>
       <div className='w-[30%] p-6 bg-[#13308E] rounded-md text-white h-[250px]'>
@@ -47,6 +55,9 @@ const Profile = () => {
         {type === 'Thông báo' && (
           <div>
             <h2 className='text-[24px] font-semibold text-[#333]'>Thông báo</h2>
+            <div>
+              <p className='font-semibold text-[32px] text-center'>Chưa có thông báo nào</p>
+            </div>
           </div>
         )}
         {type === 'Dịch vụ đã đăng ký' && (

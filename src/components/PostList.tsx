@@ -7,6 +7,13 @@ interface IImages {
     imageUrl: string
     id: number
 }
+interface IUser {
+    id: number
+    username: string
+    email: string
+    phone: string
+    avatar: string
+}
 interface IPost {
     id: number
     name: string
@@ -15,7 +22,7 @@ interface IPost {
     price: number
     address: string
     arcreage: number
-    userId: number
+    user: IUser
     serviceId: number
 }
 interface IPostApiResult {
@@ -35,6 +42,7 @@ const PostList: React.FC<QueryGetPost> = ({ itemPerPage, page, search, roomType,
         }
         getAllPost()
     }, [address, itemPerPage, page, roomType, search])
+    console.log(result)
     return (
         <div>
             {result?.data?.length === 0 && <p className='text-center text-[18px]'>Không có bài viết nào</p>}
@@ -55,6 +63,10 @@ const PostList: React.FC<QueryGetPost> = ({ itemPerPage, page, search, roomType,
                                     <p className='text-[16px] font-semibold '>Giá: {post.price} VND</p>
                                 </div>
                                 <p className=' text-[#333] text-[14px] mt-4'>{post.description}</p>
+                                <div className='flex justify-between border-t mt-2 border-red-200'>
+                                    <span>Người đăng: {post?.user.username}</span>
+                                    <span>SĐT: {post?.user.phone ? post?.user.phone : ""}</span>
+                                </div>
                             </div>
                         </div>
                     </Fragment>

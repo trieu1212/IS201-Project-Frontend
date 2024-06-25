@@ -1,4 +1,4 @@
-import Axios from 'axios'
+import Axios from '../Axios'
 import { CreateOrder } from '../types/CreateOrder'
 
 export const OrderApis = {
@@ -6,5 +6,9 @@ export const OrderApis = {
         url: '/order/create',
         method: 'POST',
         data
-    })
+    }),
+    getAll: async () => Axios({
+        url: '/order',
+        method: 'GET'
+    }),
 }
