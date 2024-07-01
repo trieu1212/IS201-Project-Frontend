@@ -4,4 +4,5 @@ export interface QueryGetPost {
     search?:string
     roomType?:string
     address?:string
+    setPage?:(page:number) => void 
 }

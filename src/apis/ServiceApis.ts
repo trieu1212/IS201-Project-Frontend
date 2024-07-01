@@ -6,4 +6,8 @@ export const serviceApis = {
         url:`/service?`,
         method:'GET',
     }),
+    getOne: async (id:string | null)=>Axios({
+        url:`/service/${id}`,
+        method:'GET'
+    })
 }

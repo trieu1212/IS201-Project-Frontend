@@ -1,4 +1,4 @@
-import React from 'react'
+
 import logo from '../assets/images/logo.svg'
 import { Icons } from '../ultils/Icons'
 import Button from './Button'
@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { authApis } from '../apis/AuthApis'
 import { toast } from 'react-toastify'
 import { logoutSuccess } from '../redux/slice/appSlice'
-import { Path } from '../ultils/Path'
 const Header = () => {
     const { FaUserPlus, FaRegHeart, FaRegArrowAltCircleRight, CiCirclePlus } = Icons
     const { user } = useSelector((state: any) => state.app)
@@ -15,7 +14,6 @@ const Header = () => {
     const dispatch = useDispatch()
     const handleLogout = async () => {
         const response = await authApis.logout()
-        console.log(response)
         if (response.status === 201) {
             toast.success('Đăng xuất thành công')
             dispatch(logoutSuccess())
@@ -55,6 +53,7 @@ const Header = () => {
                                         {user?.username}
                                     </Link>
                                 </span>
+                                <span> {user?.isAdmin ? "- Admin" : ""}</span>
                             </span>
                             <span
                                 className='flex items-center gap-2 hover:underline cursor-pointer'
@@ -66,11 +65,13 @@ const Header = () => {
                         </div>
                     }
                     <span>
-                        <Button
-                            name='Đăng tin miễn phí'
-                            style='bg-blue-500 text-white px-4 py-2 rounded-md flex items-center hover:bg-blue-600 hover:underline transition duration-300 ease-in-out'
-                            iconAfter={CiCirclePlus}
-                        />
+                        <Link to={`/private/upload`}>
+                            {user && user?.postAmount > 0 && <Button
+                                name='Đăng bài viết'
+                                style='bg-blue-500 text-white px-4 py-2 rounded-md flex items-center hover:bg-blue-600 hover:underline transition duration-300 ease-in-out'
+                                iconAfter={CiCirclePlus}
+                            />}
+                        </Link>
                     </span>
                 </div>
             </div>

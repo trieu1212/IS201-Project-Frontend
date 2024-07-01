@@ -35,16 +35,17 @@ const Home = () => {
                     />
                 </div>
                  <span className='my-3 font-semibold'>{address}</span>
-                <div className='flex gap-2 mt-12'>
-                    <div className='w-3/5 border p-4 bg-white rounded-md'>
+                <div className='flex gap-6 mt-12'>
+                    <div className='w-4/5 border p-2 bg-white rounded-md'>
                         <PostList
                             itemPerPage='6'
                             address={address}
                             page={page.toString()}
                             roomType={roomType}
+                            setPage={setPage}
                         />
                     </div>
-                    <div className='w-2/5 border p-4 rounded-md'>
+                    <div className='w-1/5 h-[500px] border p-4 rounded-md'>
                         <Category 
                             setRoomType={setRoomType}
                         />
