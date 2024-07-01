@@ -10,4 +10,6 @@ export const Path = {
     PROFILE: 'profile', 
     DETAIL_POST: 'detail-post/:id', 
     BUY_SERVICE: 'buy-service/:id', 
+    UPLOAD: 'upload',
+    MANAGE_POST: 'manage-post',
   };

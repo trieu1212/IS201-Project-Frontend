@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import {  Header, Navigation } from '../../components'
+import {  Footer, Header, Navigation } from '../../components'
 const Public = () => {
   return (
     <>
@@ -12,6 +12,9 @@ const Public = () => {
         <div >
           <Outlet />
         </div>
+        <footer>
+          <Footer/>
+        </footer>
       </div>
     </>
   )

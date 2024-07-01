@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { serviceApis } from '../../apis/ServiceApis'
 import timestampToString from '../../ultils/Helpers'
@@ -7,6 +7,8 @@ import {InputField } from '../../components'
 import { CreateOrder } from '../../types/CreateOrder'
 import { OrderApis } from '../../apis/OrderApis'
 import { toast } from 'react-toastify'
+import { userApis } from '../../apis/UserApis'
+import { loginSuccess } from '../../redux/slice/appSlice'
 interface IService {
   id: number
   name: string
@@ -21,9 +23,14 @@ const BuyService = () => {
   const { user } = useSelector((state: any) => state.app)
   const id = useParams<{ id: string }>().id
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [service, setService] = React.useState<IService>()
   const [email, setEmail] = React.useState<string>(user?.email || '')
   const [phoneNumber, setPhoneNumber] = React.useState<string>(user?.phone || '')
+  const getUser = async () => {
+    const res = await userApis.getUser(user?.id)
+    dispatch(loginSuccess(res.data))
+  }
   const handleBuyService = async () => {
     const  data: CreateOrder = {
       serviceId: service?.id || 0,
@@ -34,6 +41,7 @@ const BuyService = () => {
     try {
       const res = await OrderApis.createOrder(data)
       toast.success(res.data.message)
+      getUser()
       navigate("/service")
     } catch (error:any) {
       toast.error(error.response.data.message)

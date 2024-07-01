@@ -1,4 +1,5 @@
 import Axios from '../Axios'
+import { CreatePost } from '../types/CreatePost'
 import { QueryGetPost } from '../types/QueryGetPosts'
 
 export const PostApis = {
@@ -10,5 +11,11 @@ export const PostApis = {
     getOne: async (id:string) => Axios({
         url:`/posts/${id}`,
         method:'GET'
-    })
+    }),
+
+    create: async (data: CreatePost) => Axios({
+        url:'/posts/create',
+        method:'POST',
+        data
+    }),
 }

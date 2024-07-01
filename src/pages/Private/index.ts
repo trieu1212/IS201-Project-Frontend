@@ -1,3 +1,5 @@
 export {default as Private} from './Private'
 export {default as Profile} from './Profile'
 export {default as BuyService} from './BuyService'
+export {default as Upload} from './Upload'
+export {default as PostManage} from './PostManage'

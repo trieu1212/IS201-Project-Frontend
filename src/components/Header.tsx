@@ -53,7 +53,7 @@ const Header = () => {
                                         {user?.username}
                                     </Link>
                                 </span>
-                                <span> {user?.isAdmin ? "- Admin":""}</span>
+                                <span> {user?.isAdmin ? "- Admin" : ""}</span>
                             </span>
                             <span
                                 className='flex items-center gap-2 hover:underline cursor-pointer'
@@ -65,11 +65,13 @@ const Header = () => {
                         </div>
                     }
                     <span>
-                        {user && user?.postAmount > 0 && <Button
-                            name='Đăng bài viết'
-                            style='bg-blue-500 text-white px-4 py-2 rounded-md flex items-center hover:bg-blue-600 hover:underline transition duration-300 ease-in-out'
-                            iconAfter={CiCirclePlus}
-                        />}
+                        <Link to={`/private/upload`}>
+                            {user && user?.postAmount > 0 && <Button
+                                name='Đăng bài viết'
+                                style='bg-blue-500 text-white px-4 py-2 rounded-md flex items-center hover:bg-blue-600 hover:underline transition duration-300 ease-in-out'
+                                iconAfter={CiCirclePlus}
+                            />}
+                        </Link>
                     </span>
                 </div>
             </div>

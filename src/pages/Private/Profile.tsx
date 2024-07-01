@@ -2,17 +2,49 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { OrderApis } from '../../apis/OrderApis'
 
+interface IService {
+  id: number
+  name: string
+  description: string
+  dateTime: number
+  price: number
+  postAmount: number
+  status: boolean
+}
+interface IUser {
+  id: number
+  username: string
+  avatar: string
+  email: string
+}
+interface IOrder {
+  id: number
+  dateEnd: number
+  dateStart: number
+  status: string
+  user: IUser
+  service: IService
+}
+interface IPostApiResult {
+  data: IOrder[],
+  total: number,
+  currentPage: number,
+  nextPage: number | null,
+  prevPage: number | null,
+  lastPage: number
+}
 const Profile = () => {
   const { user } = useSelector((state: any) => state.app)
   const [type, setType] = React.useState<string>('Chỉnh sửa thông tin')
-  const [orders, setOrders] = React.useState<any[]>([])
-  useEffect(()=>{
-    const getAllOrder = async() => {
+  const [result, setResult] = React.useState<IPostApiResult>()
+  useEffect(() => {
+    const getAllOrder = async () => {
       const res = await OrderApis.getAll()
-      setOrders(res.data)
+      setResult(res.data)
     }
     getAllOrder()
-  },[])
+  }, [])
+  console.log(result?.data)
   return (
     <div className='w-[1100px] mx-auto flex gap-4 mt-4 '>
       <div className='w-[30%] p-6 bg-[#13308E] rounded-md text-white h-[250px]'>
@@ -62,7 +94,42 @@ const Profile = () => {
         )}
         {type === 'Dịch vụ đã đăng ký' && (
           <div>
-            <h2 className='text-[24px] font-semibold text-[#333]'>Dịch vụ đã đăng ký</h2>
+            <h2 className='text-[24px] font-semibold text-[#333] text-center'>Dịch vụ đã đăng ký</h2>
+            <div className='border w-full mx-auto text-[20px]'>
+              {result?.data?.map((order) => {
+                return (
+                  <div key={order.id} className='p-2'>
+                    <h1>Đơn hàng #{order.id}</h1>
+                    <div className='flex gap-4'>
+                      <div>
+                      <div className='flex gap-2'>
+                        Tên dịch vụ:
+                        <span className='font-semibold'> {order.service.name} </span>
+                      </div>
+                      <div className='flex gap-2'>
+                        Số bài đăng: 
+                        <span className='font-semibold'>
+                          {order.service.postAmount}
+                        </span>
+                      </div>
+                      </div>   
+                      <div className='flex gap-2'>
+                        Trạng thái: 
+                        <span className='font-semibold'>
+                          {order.status}
+                        </span>
+                      </div>
+                      <div className='flex gap-2'>
+                        Giá dịch vụ:
+                        <span>
+                          {order.service.price} VNĐ
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         )}
       </div>

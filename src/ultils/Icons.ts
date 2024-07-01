@@ -10,6 +10,10 @@ import { GiMoneyStack } from "react-icons/gi";
 import { AiOutlineColumnWidth } from "react-icons/ai";
 import { IoIosSearch } from "react-icons/io";
 import { IoMdArrowDropright } from "react-icons/io";
+import { FaPhone } from "react-icons/fa6";
+import { SiZalo } from "react-icons/si";
+import { GoDotFill } from "react-icons/go";
+import { IoMail } from "react-icons/io5";
 export const Icons={
     FaRegHeart,
     FaUserPlus,
@@ -22,5 +26,9 @@ export const Icons={
     GiMoneyStack,
     AiOutlineColumnWidth,
     IoIosSearch,
-    IoMdArrowDropright
+    IoMdArrowDropright,
+    FaPhone,
+    SiZalo,
+    GoDotFill,
+    IoMail
 }

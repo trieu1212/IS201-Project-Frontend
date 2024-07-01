@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Public, Home, Login, Register, Service, DetailPost } from './pages/Public'
 import { Path } from './ultils/Path'
 import { ToastContainer } from 'react-toastify'
-import { BuyService, Private, Profile } from './pages/Private'
+import { BuyService, PostManage, Private, Profile, Upload } from './pages/Private'
 function App() {
 
   return (
@@ -18,6 +18,8 @@ function App() {
         <Route path={Path.PRIVATE} element={<Private />}>
           <Route path={Path.PROFILE} element={<Profile />} />
           <Route path={Path.BUY_SERVICE} element={<BuyService />} />
+          <Route path={Path.UPLOAD} element={<Upload />} />
+          <Route path={Path.MANAGE_POST} element={<PostManage />} />
         </Route>
         <Route path={Path.LOGIN} element={<Login />} />
         <Route path={Path.REGISTER} element={<Register />} />
