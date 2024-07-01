@@ -55,8 +55,8 @@ const BuyService = () => {
     getOneService()
   }, [id])
   return (
-    <div className='flex w-[1100px] py-2 mx-auto gap-4'>
-      <div className='w-[40%] h-[250px] flex flex-col gap-4 items-center border rounded-md shadow-lg py-4'>
+    <div className='flex w-full md:w-[1100px] py-2 mx-auto gap-4'>
+      <div className='w-full md:w-[40%] h-auto flex flex-col gap-4 items-center border rounded-md shadow-lg py-4'>
         <h1 className='font-semibold text-[24px]'>Thông tin dịch vụ</h1>
         <div>
           <p>Tên dịch vụ: {service?.name}</p>
@@ -96,7 +96,7 @@ const BuyService = () => {
           </button>
           <button 
             className='p-2 bg-red-400 rounded-lg hover:bg-red-600 hover:text-white'
-            onClick={()=>navigate("/service")}
+            onClick={() => navigate("/service")}
           >
             Quay về
           </button>

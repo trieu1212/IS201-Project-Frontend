@@ -12,4 +12,5 @@ export const Path = {
     BUY_SERVICE: 'buy-service/:id', 
     UPLOAD: 'upload',
     MANAGE_POST: 'manage-post',
+    ADMIN: 'admin',
   };

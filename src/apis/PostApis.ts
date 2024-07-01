@@ -18,4 +18,9 @@ export const PostApis = {
         method:'POST',
         data
     }),
+
+    getByUser: async (id:string) => Axios({
+        url:`/posts/user/${id}`,
+        method:'GET'
+    }),
 }
