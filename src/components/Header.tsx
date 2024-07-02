@@ -73,7 +73,8 @@ const Header = () => {
                             />}
                         </Link>
                     </span>
-                    {user?.isAdmin && <span>
+                    {user?.isAdmin == 1 && (
+                    <span>
                         <Link to={`/admin/services`}>
                             <Button
                                 name='Admin'
@@ -81,7 +82,8 @@ const Header = () => {
                                 iconAfter={CiCirclePlus}
                             />
                         </Link>    
-                    </span>}
+                    </span>
+                )}
                 </div>
             </div>
         </>

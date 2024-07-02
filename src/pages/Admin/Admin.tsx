@@ -4,11 +4,11 @@ import { Outlet } from 'react-router-dom'
 
 const Admin = () => {
   return (
-    <div className='flex gap-2'>
-        <div className='w-[25%]'>
+    <div className='flex'>
+        <div className=''>
             <AdminSidebar/>
         </div>
-        <div className='w-[75%]'>
+        <div className='ml-64 p-4'>
             <Outlet/>
         </div>
     </div>

@@ -23,4 +23,9 @@ export const PostApis = {
         url:`/posts/user/${id}`,
         method:'GET'
     }),
+
+    approve: async (id:number) => Axios({
+        url:`/posts/approve/${id}`,
+        method:'PUT'
+    }),
 }

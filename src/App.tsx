@@ -5,7 +5,8 @@ import { Public, Home, Login, Register, Service, DetailPost } from './pages/Publ
 import { Path } from './ultils/Path'
 import { ToastContainer } from 'react-toastify'
 import { BuyService, PostManage, Private, Profile, Upload } from './pages/Private'
-import { Admin } from './pages/Admin'
+import { Admin, PostsManage, ServiceManage, UserManage } from './pages/Admin'
+import DetailPostManage from './pages/Admin/DetailPostManage'
 function App() {
 
   return (
@@ -23,7 +24,10 @@ function App() {
           <Route path={Path.MANAGE_POST} element={<PostManage />} />
         </Route>
         <Route path={Path.ADMIN} element={<Admin/>}>
-
+          <Route path={Path.SERVICE_MANAGE} element={<ServiceManage />} />
+          <Route path={Path.POST_MANAGE} element={<PostsManage />} />
+          <Route path={Path.DETAIL_POST_MANAGE} element={<DetailPostManage />} />
+          <Route path={Path.USER_MANAGE} element={<UserManage />} />
         </Route>
         <Route path={Path.LOGIN} element={<Login />} />
         <Route path={Path.REGISTER} element={<Register />} />

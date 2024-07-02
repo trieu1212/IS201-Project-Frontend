@@ -47,7 +47,7 @@ const Upload = () => {
   const [imageUrls, setImageUrls] = React.useState<string[]>([])
   const [address, setAddress] = React.useState<string>('')
   const [serviceId, setServiceId] = React.useState<number | null>(null);
-  const [price, setPrice] = React.useState<number|null>(null)
+  const [price, setPrice] = React.useState<number | null>(null)
   const navigate = useNavigate()
   const getBoughtServices = async () => {
     const res = await OrderApis.getAll()
@@ -63,12 +63,27 @@ const Upload = () => {
       setImageUrls(urls);
     }
   }
+  const handleAddImageUrl = () => {
+    setImageUrls((prevUrls) => [...prevUrls, '']);
+  };
+
+  const handleImageUrlChange = (index: number, url: string) => {
+    const newUrls = [...imageUrls];
+    newUrls[index] = url;
+    setImageUrls(newUrls);
+  };
+
+  const handleRemoveImageUrl = (index: number) => {
+    const newUrls = [...imageUrls];
+    newUrls.splice(index, 1);
+    setImageUrls(newUrls);
+  };
   const handleUpload = async () => {
     if (postName === '' || description === '' || acreage === '' || roomType === '' || address === '' || serviceId === null || imageUrls.length === 0) {
       toast.error('Vui lòng điền đầy đủ thông tin')
       return
     }
-    else{
+    else {
       const data: CreatePost = {
         name: postName,
         arcreage: acreage,
@@ -170,15 +185,38 @@ const Upload = () => {
               })}
             </select>
           </div>
-          <div className='flex flex-col gap-3'>
-            <p className='font-semibold'>Hình ảnh bài đăng</p>
-            <input type="file" multiple onChange={handleAddFiles} />
-            <div className='flex gap-4'>
-              {imageUrls.map((url) => {
-                return (
-                  <img src={url} alt="" className='w-[100px] h-[100px]' />
-                )
-              })}
+          <div className="flex flex-col gap-3">
+            <p className="font-semibold">Hình ảnh bài đăng</p>
+            <div className="flex flex-col gap-4">
+              {imageUrls.map((url, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={url}
+                    onChange={(e) => handleImageUrlChange(index, e.target.value)}
+                    className="w-[250px] h-[40px] border border-gray-300 rounded-md px-2"
+                  />
+                  {url && (
+                    <img
+                      src={url}
+                      alt={`Image ${index}`}
+                      className="w-[120px] h-[100px] object-cover rounded-md"
+                    />
+                  )}
+                  {index === imageUrls.length - 1 && (
+                    <button
+                      type="button"
+                      className="text-red-500"
+                      onClick={() => handleRemoveImageUrl(index)}
+                    >
+                      -
+                    </button>
+                  )}
+                </div>
+              ))}
+              <button type="button" className="text-blue-500" onClick={handleAddImageUrl}>
+                Thêm URL
+              </button>
             </div>
           </div>
         </div>

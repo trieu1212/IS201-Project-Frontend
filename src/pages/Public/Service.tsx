@@ -41,28 +41,30 @@ const Service = () => {
         }
     }
   return (
-    <div className='container w-[1100px] mx-auto mt-12'>
-    {services?.data.length === 0 && <div className='text-center font-bold text-3xl'>Không có dữ liệu</div>}
-    {
-        services && services.data.length > 0 && services.data.map((service: IService) => (
-            <div key={service.id} className='border p-4 my-4 flex items-center justify-between'>
-                <div>
-                    <h2 className='text-xl font-semibold'>{service.name}</h2>
-                    <p className='text-gray-700'>Mô tả: {service.description}</p>
-                    <p className='text-gray-700'>Giá dịch vụ: {service.price}</p>
-                    <p className='text-gray-700'>Số lượng bài đăng của dịch vụ: {service.postAmount}</p>
-                </div>
-                <div>
-                    <Button
-                        name='Mua ngay'
-                        style='bg-blue-500 p-2 rounded-sm text-white text-lg hover:bg-blue-600'
-                        handleSubmit={() => handleBuyService(service.id)}
-                    />
-                </div>
+    <div className="container w-[1100px] mx-auto mt-12">
+      {services?.data.length === 0 && <div className="text-center font-bold text-3xl">Không có dữ liệu</div>}
+      {services &&
+        services.data.length > 0 &&
+        services.data
+          .filter((service) => service.status) 
+          .map((service: IService) => (
+            <div key={service.id} className="border p-4 my-4 flex items-center justify-between">
+              <div>
+                <h2 className="text-xl font-semibold">{service.name}</h2>
+                <p className="text-gray-700">Mô tả: {service.description}</p>
+                <p className="text-gray-700">Giá dịch vụ: {service.price}</p>
+                <p className="text-gray-700">Số lượng bài đăng của dịch vụ: {service.postAmount}</p>
+              </div>
+              <div>
+                <Button
+                  name="Mua ngay"
+                  style="bg-blue-500 p-2 rounded-sm text-white text-lg hover:bg-blue-600"
+                  handleSubmit={() => handleBuyService(service.id)}
+                />
+              </div>
             </div>
-        ))
-    }
-</div>
+          ))}
+    </div>
   )
 }
 
