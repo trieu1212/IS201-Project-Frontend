@@ -73,6 +73,17 @@ const Header = () => {
                             />}
                         </Link>
                     </span>
+                    {user?.isAdmin == 1 && (
+                    <span>
+                        <Link to={`/admin/services`}>
+                            <Button
+                                name='Admin'
+                                style='bg-red-500 text-white px-4 py-2 rounded-md flex items-center hover:bg-red-600 hover:underline transition duration-300 ease-in-out'
+                                iconAfter={CiCirclePlus}
+                            />
+                        </Link>    
+                    </span>
+                )}
                 </div>
             </div>
         </>

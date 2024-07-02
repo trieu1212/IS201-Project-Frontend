@@ -46,7 +46,7 @@ const Login = () => {
             <InputField
               data={username}
               setData={setUsername}
-              placeholder='Họ và tên'
+              placeholder='Tên đăng nhập'
             />
           </div>
           <div className='flex flex-col gap-3'>
@@ -66,7 +66,11 @@ const Login = () => {
             handleSubmit={handleLogin}
           />
         </div>
-        <div>
+        <div className='flex flex-col items-center'>
+          <p 
+            className='hover:text-[#f73859]'
+            onClick={() => navigate('/forgot-pass')}
+          >Quên mật khẩu</p>
           <p className='text-[14px] mt-4'>
             Bạn chưa có tài khoản? <Link to='/register' className='hover:text-[#f73859]'>Đăng kí ngay!</Link>
           </p>

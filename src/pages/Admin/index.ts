@@ -1,0 +1,6 @@
+export {default as Admin} from './Admin'
+export {default as ServiceManage} from './ServiceManage'
+export {default as PostsManage} from './PostsManage'
+export {default as ServiceModal} from './ServiceModal'
+export {default as UserManage} from './UserManage'
+export {default as UserModal} from './UserModal'

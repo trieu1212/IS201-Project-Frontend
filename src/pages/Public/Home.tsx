@@ -20,17 +20,17 @@ const Home = () => {
                 <div className='flex justify-center gap-6 mt-6'>
                     <ProvinceOption
                         setAddress={setAddress}
-                        province='Phòng trọ Hồ Chí Minh'
+                        province='Thành phố Hồ Chí Minh'
                         image='https://phongtro123.com/images/location_hcm.jpg'
                     />
                     <ProvinceOption
                         setAddress={setAddress}
-                        province='Phòng trọ Hà Nội'
+                        province='Thành phố Hà Nội'
                         image='https://phongtro123.com/images/location_hn.jpg'
                     />
                     <ProvinceOption
                         setAddress={setAddress}
-                        province='Phòng trọ Đà Nẵng'
+                        province='Thành phố Đà Nẵng'
                         image='https://phongtro123.com/images/location_dn.jpg'
                     />
                 </div>

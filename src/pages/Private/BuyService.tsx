@@ -9,6 +9,7 @@ import { OrderApis } from '../../apis/OrderApis'
 import { toast } from 'react-toastify'
 import { userApis } from '../../apis/UserApis'
 import { loginSuccess } from '../../redux/slice/appSlice'
+import { NotiApis } from '../../apis/NotiApis'
 interface IService {
   id: number
   name: string
@@ -29,20 +30,40 @@ const BuyService = () => {
   const [phoneNumber, setPhoneNumber] = React.useState<string>(user?.phone || '')
   const getUser = async () => {
     const res = await userApis.getUser(user?.id)
-    dispatch(loginSuccess(res.data))
+    const data = {
+      user:res.data,
+      JWTToken:{
+        accessToken: user?.accessToken,
+        refreshToken: user?.refreshToken
+      }
+    }
+    dispatch(loginSuccess(data))
   }
   const handleBuyService = async () => {
-    const  data: CreateOrder = {
-      serviceId: service?.id || 0,
-      userId: user?.id || 0,
+    const data: CreateOrder = {
+      serviceId: Number(service?.id),
+      userId: user.id,
       dateStart: Date.now().toString(),
-      dateEnd: (Date.now() + service?.dateTime||0 * 24 * 60 * 60 * 1000).toString(),
-    }
+      dateEnd: (Date.now() + service.dateTime * 24 * 60 * 60 * 1000).toString(),
+    };
     try {
       const res = await OrderApis.createOrder(data)
-      toast.success(res.data.message)
+      toast.success("Mua dịch vụ thành công!")
       getUser()
-      navigate("/service")
+      handleCreateNotification()
+    } catch (error:any) {
+      toast.error(error.response.data.message)
+    }
+  }
+  const handleCreateNotification = async () => {
+    const data = {
+      userId: user?.id,
+      title: 'Cảm ơn quý khách đã mua dịch vụ của chúng tôi!',
+      message: `Bạn đã mua dịch vụ ${service?.name} với số tiền ${service?.price} triệu`,
+      type: 'success'
+    }
+    try {
+      await NotiApis.createNoti(data)
     } catch (error:any) {
       toast.error(error.response.data.message)
     }
@@ -55,10 +76,10 @@ const BuyService = () => {
     getOneService()
   }, [id])
   return (
-    <div className='flex w-[1100px] py-2 mx-auto gap-4'>
-      <div className='w-[40%] h-[250px] flex flex-col gap-4 items-center border rounded-md shadow-lg py-4'>
+    <div className='flex w-full md:w-[1100px] py-2 mx-auto gap-4'>
+      <div className='w-full md:w-[40%] h-auto flex flex-col gap-4 items-center border rounded-md shadow-lg py-4'>
         <h1 className='font-semibold text-[24px]'>Thông tin dịch vụ</h1>
-        <div>
+        <div className='p-2'>
           <p>Tên dịch vụ: {service?.name}</p>
           <p>Giá: {service?.price}</p>
           <p>Mô tả: {service?.description}</p>
@@ -96,7 +117,7 @@ const BuyService = () => {
           </button>
           <button 
             className='p-2 bg-red-400 rounded-lg hover:bg-red-600 hover:text-white'
-            onClick={()=>navigate("/service")}
+            onClick={() => navigate("/service")}
           >
             Quay về
           </button>

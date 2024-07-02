@@ -16,6 +16,7 @@ interface IService {
   status: boolean
 }
 interface IUser {
+  name: string
   id: number
   username: string
   avatar: string
@@ -47,7 +48,7 @@ const Upload = () => {
   const [imageUrls, setImageUrls] = React.useState<string[]>([])
   const [address, setAddress] = React.useState<string>('')
   const [serviceId, setServiceId] = React.useState<number | null>(null);
-  const [price, setPrice] = React.useState<number|null>(null)
+  const [price, setPrice] = React.useState<number | null>(null)
   const navigate = useNavigate()
   const getBoughtServices = async () => {
     const res = await OrderApis.getAll()
@@ -63,12 +64,27 @@ const Upload = () => {
       setImageUrls(urls);
     }
   }
+  const handleAddImageUrl = () => {
+    setImageUrls((prevUrls) => [...prevUrls, '']);
+  };
+
+  const handleImageUrlChange = (index: number, url: string) => {
+    const newUrls = [...imageUrls];
+    newUrls[index] = url;
+    setImageUrls(newUrls);
+  };
+
+  const handleRemoveImageUrl = (index: number) => {
+    const newUrls = [...imageUrls];
+    newUrls.splice(index, 1);
+    setImageUrls(newUrls);
+  };
   const handleUpload = async () => {
     if (postName === '' || description === '' || acreage === '' || roomType === '' || address === '' || serviceId === null || imageUrls.length === 0) {
       toast.error('Vui lòng điền đầy đủ thông tin')
       return
     }
-    else{
+    else {
       const data: CreatePost = {
         name: postName,
         arcreage: acreage,
@@ -80,14 +96,23 @@ const Upload = () => {
         imageUrls
       }
       try {
-        const res = await PostApis.create(data)
+         await PostApis.create(data)
         toast.success('Đăng bài đăng thành công')
-        navigate('/')
+        navigate('/thank')
       } catch (error) {
         toast.error('Đăng bài đăng thất bại')
       }
     }
   }
+  const uniqueServices = React.useMemo(() => {
+    const serviceMap = new Map<string, IService>();
+    result?.data.forEach(order => {
+      if (!serviceMap.has(order.service.name)) {
+        serviceMap.set(order.service.name, order.service);
+      }
+    });
+    return Array.from(serviceMap.values());
+  }, [result]);
   return (
     <div className='mx-auto w-[1100px] flex gap-4'>
       <div className='p-2'>
@@ -161,24 +186,47 @@ const Upload = () => {
             <span className='font-semibold'>Dịch vụ bài đăng</span>
             <select name="" id="" className='border' onChange={(e) => setServiceId(Number(e.target.value))}>
               <option value="">Chọn dịch vụ</option>
-              {result?.data.map((item) => {
+              {uniqueServices.map((item) => {
                 return (
-                  <option value={item.service.id}>
-                    {item.service.name}
+                  <option value={item.id}>
+                    {item.name}
                   </option>
                 )
               })}
             </select>
           </div>
-          <div className='flex flex-col gap-3'>
-            <p className='font-semibold'>Hình ảnh bài đăng</p>
-            <input type="file" multiple onChange={handleAddFiles} />
-            <div className='flex gap-4'>
-              {imageUrls.map((url) => {
-                return (
-                  <img src={url} alt="" className='w-[100px] h-[100px]' />
-                )
-              })}
+          <div className="flex flex-col gap-3">
+            <p className="font-semibold">Hình ảnh bài đăng</p>
+            <div className="flex flex-col gap-4">
+              {imageUrls.map((url, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={url}
+                    onChange={(e) => handleImageUrlChange(index, e.target.value)}
+                    className="w-[250px] h-[40px] border border-gray-300 rounded-md px-2"
+                  />
+                  {url && (
+                    <img
+                      src={url}
+                      alt={`Image ${index}`}
+                      className="w-[120px] h-[100px] object-cover rounded-md"
+                    />
+                  )}
+                  {index === imageUrls.length - 1 && (
+                    <button
+                      type="button"
+                      className="text-red-500 text-[20px]"
+                      onClick={() => handleRemoveImageUrl(index)}
+                    >
+                      X
+                    </button>
+                  )}
+                </div>
+              ))}
+              <button type="button" className="text-blue-500" onClick={handleAddImageUrl}>
+                Thêm URL
+              </button>
             </div>
           </div>
         </div>
@@ -196,7 +244,7 @@ const Upload = () => {
         <div className='flex gap-3'>
           <span className='font-semibold '>Tên người đăng: </span>
           <span>
-            {user.username}
+            {user.name}
           </span>
         </div>
         <div className='flex gap-3'>

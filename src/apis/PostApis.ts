@@ -18,4 +18,19 @@ export const PostApis = {
         method:'POST',
         data
     }),
+
+    getByUser: async (id:string) => Axios({
+        url:`/posts/user/${id}`,
+        method:'GET'
+    }),
+
+    approve: async (id:number) => Axios({
+        url:`/posts/approve/${id}`,
+        method:'PUT'
+    }),
+
+    hide: async (id:number) => Axios({
+        url:`/posts/hide/${id}`,
+        method:'PUT'
+    }),
 }

@@ -15,5 +15,10 @@ export const authApis = {
     logout: async () => Axios({
         url:'/auth/logout',
         method:'POST',
-    })
+    }),
+    forgotPass: async (email:string) => Axios({
+        url:'/auth/forgot-password',
+        method:'POST',
+        data:{email}
+    }),
 }
