@@ -54,7 +54,6 @@ const ProfileModal: React.FC<EditProfileProps> = ({ user, showModal, setShowModa
                 refreshToken: currentUser?.refreshToken
             }
         }
-        console.log(data);
         if (validate()) {
             await userApis.update(String(editUser.id), editUser);
             dispatch(loginSuccess(data));

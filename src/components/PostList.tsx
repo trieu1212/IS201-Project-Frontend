@@ -51,8 +51,8 @@ const PostList: React.FC<QueryGetPost> = ({ itemPerPage, page, search, roomType,
         }
         getAllPost()
     }, [address, itemPerPage, page, roomType, search])
-    const VIP_SERVICE_ID = 1;
-    const DIAMOND_SERVICE_ID = 2;
+    const VIP_SERVICE_ID = 2;
+    const DIAMOND_SERVICE_ID = 1;
     const BASIC_SERVICE_ID = 3;
     return (
         <div className='container mx-auto pb-8'>
@@ -63,15 +63,16 @@ const PostList: React.FC<QueryGetPost> = ({ itemPerPage, page, search, roomType,
                     <Fragment key={post.id}>
                         <div 
                             className={`flex gap-4 border-b border-red-500 bg-[#FFF9F3] p-4 
-                                ${post.service.id === VIP_SERVICE_ID ? "bg-[#ff6666]": "" }
-                                ${post.service.id === DIAMOND_SERVICE_ID ? "bg-[#8b0000]": "" }
+                                ${post.service.id === VIP_SERVICE_ID ? "bg-[#e6a387]": "" }
+                                ${post.service.id === DIAMOND_SERVICE_ID ? "bg-[#f99c9c]": "" }
                                 ${post.service.id === BASIC_SERVICE_ID ? "bg-[#d3d3d3]": "" }
                             `}   
                         >
                             <img
                                 src={`${post.images.length > 0 ? `${post.images[0].imageUrl}` : "https://pt123.cdn.static123.com/images/thumbs/450x300/fit/2024/06/12/20240612-165737_1718187074.jpg"}`}
                                 alt=''
-                                className='w-[250px] h-[200px] object-cover'
+                                className='w-[150px] h-[200px] '
+                                style={{ objectFit: 'cover', objectPosition: 'center' }}
                             />
                             <div>
                                 <Link to={`/detail-post/${post.id}`}>
@@ -89,7 +90,7 @@ const PostList: React.FC<QueryGetPost> = ({ itemPerPage, page, search, roomType,
                                     </div>
                                 </Link>
                                 <div className='flex justify-around gap-3'>
-                                    <p className='text-[16px] text-[#25C784] font-semibold'>
+                                    <p className='text-[16px] text-[#257654] font-semibold'>
                                         Diện tích: {post.arcreage}m<sup>2</sup>
                                     </p>
                                     <p className='text-[16px] font-semibold'>Địa chỉ: {post.address}</p>

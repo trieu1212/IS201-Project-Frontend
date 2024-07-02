@@ -5,6 +5,7 @@ const Home = () => {
     const [address, setAddress] = React.useState<string>('')
     const [page, setPage] = React.useState<number>(1)
     const [roomType, setRoomType] = React.useState<string>('')
+    const [search, setSearch] = React.useState<string>('')
     return (
         <>
             <div className='max-w-[1100px] mx-auto'>
