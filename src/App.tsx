@@ -1,7 +1,7 @@
 
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import { Public, Home, Login, Register, Service, DetailPost } from './pages/Public'
+import { Public, Home, Login, Register, Service, DetailPost, ForgotPass } from './pages/Public'
 import { Path } from './ultils/Path'
 import { ToastContainer } from 'react-toastify'
 import { BuyService, PostManage, Private, Profile, Thank, Upload } from './pages/Private'
@@ -32,6 +32,7 @@ function App() {
         <Route path={Path.LOGIN} element={<Login />} />
         <Route path={Path.REGISTER} element={<Register />} />
         <Route path={Path.THANK} element={<Thank />} />
+        <Route path={Path.FORGOT_PASS} element={<ForgotPass />} />
       </Routes>
       <ToastContainer
         position="top-center"

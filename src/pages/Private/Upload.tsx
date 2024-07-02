@@ -16,6 +16,7 @@ interface IService {
   status: boolean
 }
 interface IUser {
+  name: string
   id: number
   username: string
   avatar: string
@@ -103,6 +104,15 @@ const Upload = () => {
       }
     }
   }
+  const uniqueServices = React.useMemo(() => {
+    const serviceMap = new Map<string, IService>();
+    result?.data.forEach(order => {
+      if (!serviceMap.has(order.service.name)) {
+        serviceMap.set(order.service.name, order.service);
+      }
+    });
+    return Array.from(serviceMap.values());
+  }, [result]);
   return (
     <div className='mx-auto w-[1100px] flex gap-4'>
       <div className='p-2'>
@@ -176,10 +186,10 @@ const Upload = () => {
             <span className='font-semibold'>Dịch vụ bài đăng</span>
             <select name="" id="" className='border' onChange={(e) => setServiceId(Number(e.target.value))}>
               <option value="">Chọn dịch vụ</option>
-              {result?.data.map((item) => {
+              {uniqueServices.map((item) => {
                 return (
-                  <option value={item.service.id}>
-                    {item.service.name}
+                  <option value={item.id}>
+                    {item.name}
                   </option>
                 )
               })}
@@ -206,10 +216,10 @@ const Upload = () => {
                   {index === imageUrls.length - 1 && (
                     <button
                       type="button"
-                      className="text-red-500"
+                      className="text-red-500 text-[20px]"
                       onClick={() => handleRemoveImageUrl(index)}
                     >
-                      -
+                      X
                     </button>
                   )}
                 </div>
@@ -234,7 +244,7 @@ const Upload = () => {
         <div className='flex gap-3'>
           <span className='font-semibold '>Tên người đăng: </span>
           <span>
-            {user.username}
+            {user.name}
           </span>
         </div>
         <div className='flex gap-3'>

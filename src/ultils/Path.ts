@@ -17,4 +17,5 @@ export const Path = {
     DETAIL_POST_MANAGE: 'approve-post/:id',
     USER_MANAGE: 'users',
     THANK: 'thank',
+    FORGOT_PASS: 'forgot-pass',
   };

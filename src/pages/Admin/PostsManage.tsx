@@ -21,7 +21,7 @@ interface IPost {
     price: number
     address: string
     arcreage: number
-    status: number
+    status: boolean
     user: IUser
     serviceId: number
 }
@@ -64,6 +64,17 @@ const PostsManage = () => {
               <p className="text-red-500 text-sm mb-2">{post.price} triệu/tháng</p>
               <p className="text-sm text-gray-600">{post.address}</p>
               <p className="text-sm text-gray-600">{post.description}</p>
+            </div>
+            <div className="p-4">
+              <p className="text-sm text-gray-600">Người đăng: {post.user.username}</p>
+              <p className="text-sm text-gray-600">Số điện thoại: {post.user.phone}</p>
+            </div>
+            <div>
+              {post.status ? (
+                <button className="w-full bg-green-500 text-white py-2">Đã duyệt</button>
+              ) : (
+                <button className="w-full  bg-red-500 text-white py-2">Chưa duyệt</button>
+              )}
             </div>
           </div>
           </Link>

@@ -46,7 +46,6 @@ const UserManage = () => {
   React.useEffect(() => {
     getAllUsers()
   },[showModal])
-  console.log(result)
   return (
     <>
       {showModal && <UserModal

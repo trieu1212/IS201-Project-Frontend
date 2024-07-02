@@ -90,7 +90,7 @@ const ServiceManage = () => {
                 <td className="py-2 px-4 border text-center align-middle">
                   {service.status ? 'Hoạt động' : 'Ngừng hoạt động'}
                 </td>
-                <td className="py-2 px-4 border text-center align-middle">
+                <td className="py-2 px-4 border text-center align-middle flex gap-1">
                   <button
                     className="bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600 mr-2"
                     onClick={() => handleEdit(service)}

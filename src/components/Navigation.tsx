@@ -15,16 +15,16 @@ const Navigation = () => {
             name: 'Dịch vụ',
             path: '/service'
         },
-        {
-            id: 4,
-            name: 'Liên hệ',
-            path: '/contact'
-        },
-        {
-            id: 5,
-            name: 'Về chúng tôi',
-            path: '/about'
-        }
+        // {
+        //     id: 4,
+        //     name: 'Liên hệ',
+        //     path: '/contact'
+        // },
+        // {
+        //     id: 5,
+        //     name: 'Về chúng tôi',
+        //     path: '/about'
+        // }
     ]
     const authNavigateItems = [
         {

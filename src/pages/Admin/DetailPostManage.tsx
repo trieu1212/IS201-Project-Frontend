@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { PostApis } from '../../apis/PostApis'
 import { Button } from '../../components'
 import { toast } from 'react-toastify'
+import { NotiApis } from '../../apis/NotiApis'
 interface IImages {
     imageUrl: string
     id: number
@@ -37,10 +38,29 @@ const DetailPostManage = () => {
     useEffect(()=>{
         getOnePost()
     },[])
+    const handleCreateNotiForApprove = async(id:any) => {
+        const data = {
+            userId: id,
+            title: 'Bài đăng của bạn đã được duyệt',
+            message: `Bài đăng #${post?.name} của bạn đã được duyệt và hiển thị trên hệ thống`,
+            type: 'success'
+          }
+            await NotiApis.createNoti(data)
+    }
+    const handleCreateNotiForHide = async(id:any) => {
+        const data = {
+            userId: id,
+            title: 'Bài đăng của bạn đã bị ẩn',
+            message: `Bài đăng #${post?.name} của bạn đã bị ẩn khỏi hệ thống do không phù hợp với chính sách của chúng tôi`,
+            type: 'error'
+          }
+            await NotiApis.createNoti(data)
+    }
     const handleApprove = async() => {
         try {
             await PostApis.approve(Number(id))
             toast.success('Duyệt bài đăng thành công')
+            handleCreateNotiForApprove(post?.user.id)
             navigate('/admin/posts')
         } catch (error) {
             toast.error('Duyệt bài đăng thất bại')
@@ -50,6 +70,7 @@ const DetailPostManage = () => {
         try {
             await PostApis.hide(Number(id))
             toast.success('Ẩn bài đăng thành công')
+            handleCreateNotiForHide(post?.user.id)
             navigate('/admin/posts')
         } catch (error) {
             toast.error('Ẩn bài đăng thất bại')
