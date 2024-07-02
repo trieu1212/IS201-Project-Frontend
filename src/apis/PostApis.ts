@@ -28,4 +28,9 @@ export const PostApis = {
         url:`/posts/approve/${id}`,
         method:'PUT'
     }),
+
+    hide: async (id:number) => Axios({
+        url:`/posts/hide/${id}`,
+        method:'PUT'
+    }),
 }

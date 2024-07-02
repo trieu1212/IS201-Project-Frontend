@@ -95,9 +95,9 @@ const Upload = () => {
         imageUrls
       }
       try {
-        const res = await PostApis.create(data)
+         await PostApis.create(data)
         toast.success('Đăng bài đăng thành công')
-        navigate('/')
+        navigate('/thank')
       } catch (error) {
         toast.error('Đăng bài đăng thất bại')
       }

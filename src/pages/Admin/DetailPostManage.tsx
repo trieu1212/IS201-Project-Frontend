@@ -22,7 +22,7 @@ interface IPost {
     price: number
     address: string
     arcreage: number
-    status: number
+    status: boolean
     user: IUser
     serviceId: number
 }
@@ -44,6 +44,15 @@ const DetailPostManage = () => {
             navigate('/admin/posts')
         } catch (error) {
             toast.error('Duyệt bài đăng thất bại')
+        }
+    }
+    const handleHide = async() => {
+        try {
+            await PostApis.hide(Number(id))
+            toast.success('Ẩn bài đăng thành công')
+            navigate('/admin/posts')
+        } catch (error) {
+            toast.error('Ẩn bài đăng thất bại')
         }
     }
   return (
@@ -73,11 +82,22 @@ const DetailPostManage = () => {
                     ?.user.email}</p>
                     <p><strong>Số điện thoại:</strong> {post?.user.phone}</p>
                 </div>
-                <Button 
+                {post?.status === false && (
+                    <Button 
                     name="Duyệt bài đăng" 
                     style="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
                     handleSubmit={handleApprove}
-                />
+                    />
+                )}
+                {
+                    post?.status === true && (
+                        <Button 
+                        name="Ẩn bài đăng" 
+                        style="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                        handleSubmit={handleHide}
+                        />
+                    )
+                }
             </div>
         </div>
   )

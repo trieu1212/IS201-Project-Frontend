@@ -43,7 +43,6 @@ const PostList: React.FC<QueryGetPost> = ({ itemPerPage, page, search, roomType,
         }
         getAllPost()
     }, [address, itemPerPage, page, roomType, search])
-    console.log(result)
     return (
         <div className='container mx-auto pb-8'>
             {result?.data?.length === 0 && <p className='text-center text-[18px]'>Không có bài viết nào</p>}
