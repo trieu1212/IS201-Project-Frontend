@@ -44,10 +44,10 @@ const BuyService = () => {
       serviceId: Number(service?.id),
       userId: user.id,
       dateStart: Date.now().toString(),
-      dateEnd: (Date.now() + service.dateTime * 24 * 60 * 60 * 1000).toString(),
+      dateEnd: (Date.now() + service?.dateTime * 24 * 60 * 60 * 1000).toString(),
     };
     try {
-      const res = await OrderApis.createOrder(data)
+      await OrderApis.createOrder(data)
       toast.success("Mua dịch vụ thành công!")
       getUser()
       handleCreateNotification()

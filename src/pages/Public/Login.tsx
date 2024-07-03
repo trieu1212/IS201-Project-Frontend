@@ -42,7 +42,7 @@ const Login = () => {
         <h1 className='text-center font-semibold text-[28px]'>Đăng nhập</h1>
         <div className='flex flex-col gap-4 justify-center w-[400px]'>
           <div className='flex flex-col gap-3'>
-            <label htmlFor="" className='font-semibold'>Họ và tên</label>
+            <label htmlFor="" className='font-semibold'>Tên tài khoản</label>
             <InputField
               data={username}
               setData={setUsername}

@@ -21,5 +21,10 @@ export const userApis = {
         url:'/user/create',
         method:'POST',
         data
-    })
+    }),
+    updatePass: async(id:string,data:{password:string})=>Axios({
+        url:`/user/update-password/${id}`,
+        method:'PUT',
+        data
+    }),
 }

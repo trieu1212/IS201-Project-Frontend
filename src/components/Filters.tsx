@@ -2,7 +2,11 @@ import React from 'react'
 import Button from './Button'
 import FilterItems from './FilterItems'
 import {Icons} from '../ultils/Icons'
-const Filters = () => {
+interface IFilterItems {
+    search?:string
+    setSearch?:React.Dispatch<React.SetStateAction<string>>
+}
+const Filters:React.FC<IFilterItems> = ({search,setSearch}) => {
     const {TfiBackRight,IoBackspaceOutline,FcDepartment,CiLocationOn,GiMoneyStack,AiOutlineColumnWidth,IoIosSearch} =Icons
     return (
         <div className='lg:flex-row flex flex-col gap-2 items-center justify-between py-2 bg-yellow-400 px-2 rounded-xl'>

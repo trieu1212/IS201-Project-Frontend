@@ -15,7 +15,7 @@ interface IService {
 }
 interface IUser {
   id: number
-  name:string
+  name: string
   username: string
   avatar: string
   email: string
@@ -57,9 +57,10 @@ const Profile = () => {
     getAllOrder()
   }, [showModal])
   console.log(notifies)
+
   return (
     <>
-    {showModal && <ProfileModal user={user} showModal={showModal} setShowModal={setShowModal}  />}
+      {showModal && <ProfileModal user={user} showModal={showModal} setShowModal={setShowModal} />}
       <div className="max-w-6xl mx-auto flex gap-6 mt-6">
         <div className="w-1/3 p-6 bg-blue-900 rounded-md text-white h-[250px]">
           <h2 className="text-2xl text-center mb-6">Cài đặt</h2>
@@ -96,13 +97,17 @@ const Profile = () => {
                     className="w-36 h-36 object-cover rounded-full"
                   />
                   <div>
-                  <h3 className="text-xl font-semibold">{user?.name}</h3>
-                    <h3 className="text-xl font-semibold">{user?.username}</h3>
+                    <div className='flex gap-2 items-center'>
+                    <h3 className="text-xl font-semibold">Tên tài khoản:</h3><span>{user?.name}</span>
+                    </div>
+                    <div className='flex gap-2 items-center'>
+                    <h3 className="text-xl font-semibold">Nickname:</h3><span>{user?.username}</span>
+                    </div>
                     <p className="text-sm text-gray-600">Email: {user?.email}</p>
                     <p className="text-sm text-gray-600">Số điện thoại: {user?.phone}</p>
                   </div>
                 </div>
-                <button 
+                <button
                   className="bg-blue-500 text-white px-4 py-2 rounded-md h-[50px]"
                   onClick={() => setShowModal(true)}
                 >Chỉnh sửa</button>
