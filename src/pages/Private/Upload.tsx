@@ -104,7 +104,6 @@ const Upload = () => {
       }
     }
   }
-  console.log(result?.data)
   const uniqueServices = React.useMemo(() => {
     const serviceMap = new Map<string, IService>();
     result?.data.forEach(order => {
