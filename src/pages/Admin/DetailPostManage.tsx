@@ -45,7 +45,6 @@ const DetailPostManage = () => {
             message: `Bài đăng #${post?.name} của bạn đã được duyệt và hiển thị trên hệ thống`,
             type: 'success'
           }
-          console.log(data)
             await NotiApis.createNoti(data)
     }
     const handleCreateNotiForHide = async(id:any) => {
@@ -55,7 +54,6 @@ const DetailPostManage = () => {
             message: `Bài đăng #${post?.name} của bạn đã bị ẩn khỏi hệ thống do không phù hợp với chính sách của chúng tôi`,
             type: 'error'
           }
-            console.log(data)
             await NotiApis.createNoti(data)
     }
     const handleApprove = async() => {

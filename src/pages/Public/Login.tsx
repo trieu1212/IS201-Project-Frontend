@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { authApis } from '../../apis/AuthApis'
 import { LoginUser } from '../../types/LoginUser'
 import { useDispatch } from 'react-redux'
-import { loginSuccess } from '../../redux/slice/appSlice'
+import { getCurrentUser, loginSuccess } from '../../redux/slice/appSlice'
 import Swal from 'sweetalert2'
 import { toast } from 'react-toastify'
 const Login = () => {
@@ -21,6 +21,7 @@ const Login = () => {
       const response = await authApis.login(data)
     if(response.status===201){
       dispatch(loginSuccess(response.data))
+      dispatch(getCurrentUser(response.data.user))
       Swal.fire({
         icon:'success',
         title:'Đăng nhập thành công!'

@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { serviceApis } from '../../apis/ServiceApis'
 import timestampToString from '../../ultils/Helpers'
-import {InputField } from '../../components'
+import { InputField } from '../../components'
 import { CreateOrder } from '../../types/CreateOrder'
 import { OrderApis } from '../../apis/OrderApis'
 import { toast } from 'react-toastify'
 import { userApis } from '../../apis/UserApis'
-import { loginSuccess } from '../../redux/slice/appSlice'
+import { getCurrentUser, loginSuccess } from '../../redux/slice/appSlice'
 import { NotiApis } from '../../apis/NotiApis'
+import { addDays, format } from 'date-fns';
 interface IService {
   id: number
   name: string
@@ -30,28 +31,24 @@ const BuyService = () => {
   const [phoneNumber, setPhoneNumber] = React.useState<string>(user?.phone || '')
   const getUser = async () => {
     const res = await userApis.getUser(user?.id)
-    const data = {
-      user:res.data,
-      JWTToken:{
-        accessToken: user?.accessToken,
-        refreshToken: user?.refreshToken
-      }
-    }
-    dispatch(loginSuccess(data))
+    dispatch(getCurrentUser(res.data))
   }
   const handleBuyService = async () => {
+    const today = new Date();
+    const dateStart = format(today, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+    const dateEnd = format(addDays(today, service?.dateTime || 0), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
     const data: CreateOrder = {
       serviceId: Number(service?.id),
       userId: user.id,
-      dateStart: Date.now().toString(),
-      dateEnd: (Date.now() + service?.dateTime * 24 * 60 * 60 * 1000).toString(),
+      dateStart: dateStart,
+      dateEnd: dateEnd,
     };
     try {
       await OrderApis.createOrder(data)
       toast.success("Mua dịch vụ thành công!")
-      getUser()
-      handleCreateNotification()
-    } catch (error:any) {
+      await getUser()
+      await handleCreateNotification()
+    } catch (error: any) {
       toast.error(error.response.data.message)
     }
   }
@@ -64,7 +61,7 @@ const BuyService = () => {
     }
     try {
       await NotiApis.createNoti(data)
-    } catch (error:any) {
+    } catch (error: any) {
       toast.error(error.response.data.message)
     }
   }
@@ -109,13 +106,13 @@ const BuyService = () => {
         </div>
         <p>Ngày thanh toán: {timestampToString(Date.now(), "HH:mm DD:MM:YYYY")}</p>
         <div className='flex gap-4'>
-          <button 
+          <button
             className='p-2 bg-blue-300 rounded-lg hover:bg-blue-600 hover:text-white'
             onClick={handleBuyService}
           >
             Thanh toán
           </button>
-          <button 
+          <button
             className='p-2 bg-red-400 rounded-lg hover:bg-red-600 hover:text-white'
             onClick={() => navigate("/service")}
           >
