@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { userApis } from '../../apis/UserApis';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginSuccess } from '../../redux/slice/appSlice';
+import { getCurrentUser, loginSuccess } from '../../redux/slice/appSlice';
 import { toast } from 'react-toastify';
 interface IUser {
     id: number;
@@ -47,16 +47,10 @@ const ProfileModal: React.FC<EditProfileProps> = ({ user, showModal, setShowModa
     };
 
     const onSave = async () => {
-        const data = {
-            ...editUser,
-            JWTToken:{
-                accessToken: currentUser?.accessToken,
-                refreshToken: currentUser?.refreshToken
-            }
-        }
         if (validate()) {
             await userApis.update(String(editUser.id), editUser);
-            dispatch(loginSuccess(data));
+            const res = await userApis.getUser(String(editUser.id));
+            dispatch(getCurrentUser(res.data));
             setShowModal(false);
             toast.success('Cập nhật thông tin thành công');
         }

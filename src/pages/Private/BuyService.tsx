@@ -8,7 +8,7 @@ import { CreateOrder } from '../../types/CreateOrder'
 import { OrderApis } from '../../apis/OrderApis'
 import { toast } from 'react-toastify'
 import { userApis } from '../../apis/UserApis'
-import { loginSuccess } from '../../redux/slice/appSlice'
+import { getCurrentUser, loginSuccess } from '../../redux/slice/appSlice'
 import { NotiApis } from '../../apis/NotiApis'
 interface IService {
   id: number
@@ -30,14 +30,7 @@ const BuyService = () => {
   const [phoneNumber, setPhoneNumber] = React.useState<string>(user?.phone || '')
   const getUser = async () => {
     const res = await userApis.getUser(user?.id)
-    const data = {
-      user:res.data,
-      JWTToken:{
-        accessToken: user?.accessToken,
-        refreshToken: user?.refreshToken
-      }
-    }
-    dispatch(loginSuccess(data))
+    dispatch(getCurrentUser(res.data))
   }
   const handleBuyService = async () => {
     const data: CreateOrder = {
@@ -49,8 +42,8 @@ const BuyService = () => {
     try {
       await OrderApis.createOrder(data)
       toast.success("Mua dịch vụ thành công!")
-      getUser()
-      handleCreateNotification()
+      await getUser()
+      await handleCreateNotification()
     } catch (error:any) {
       toast.error(error.response.data.message)
     }

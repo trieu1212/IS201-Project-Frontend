@@ -56,7 +56,6 @@ const Profile = () => {
     }
     getAllOrder()
   }, [showModal])
-  console.log(notifies)
 
   return (
     <>
