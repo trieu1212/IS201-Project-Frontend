@@ -1,6 +1,7 @@
 import Axios from '../Axios'
 import { CreatePost } from '../types/CreatePost'
 import { QueryGetPost } from '../types/QueryGetPosts'
+import { UpdatePost } from '../types/UpdatePost'
 
 export const PostApis = {
     getAll : async (query:QueryGetPost) => Axios({
@@ -32,5 +33,11 @@ export const PostApis = {
     hide: async (id:number) => Axios({
         url:`/posts/hide/${id}`,
         method:'PUT'
+    }),
+
+    update: async (id:string, data:UpdatePost) => Axios({
+        url:`/posts/update/${id}`,
+        method:'PUT',
+        data
     }),
 }

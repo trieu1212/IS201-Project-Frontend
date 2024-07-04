@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Public, Home, Login, Register, Service, DetailPost, ForgotPass } from './pages/Public'
 import { Path } from './ultils/Path'
 import { ToastContainer } from 'react-toastify'
-import { BuyService, PostManage, Private, Profile, Thank, Upload } from './pages/Private'
+import { BuyService, PostManage, Private, PrivateDetailPost, Profile, Thank, Upload } from './pages/Private'
 import { Admin, PostsManage, ServiceManage, UserManage } from './pages/Admin'
 import DetailPostManage from './pages/Admin/DetailPostManage'
 function App() {
@@ -22,6 +22,7 @@ function App() {
           <Route path={Path.BUY_SERVICE} element={<BuyService />} />
           <Route path={Path.UPLOAD} element={<Upload />} />
           <Route path={Path.MANAGE_POST} element={<PostManage />} />
+          <Route path={Path.PRIVATE_DETAIL_POST} element={<PrivateDetailPost />} />
         </Route>
         <Route path={Path.ADMIN} element={<Admin/>}>
           <Route path={Path.SERVICE_MANAGE} element={<ServiceManage />} />

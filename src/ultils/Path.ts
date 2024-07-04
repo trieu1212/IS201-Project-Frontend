@@ -18,4 +18,5 @@ export const Path = {
     USER_MANAGE: 'users',
     THANK: 'thank',
     FORGOT_PASS: 'forgot-pass',
+    PRIVATE_DETAIL_POST: 'detail/:id' 
   };

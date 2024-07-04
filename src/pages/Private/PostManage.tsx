@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { PostApis } from '../../apis/PostApis'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 interface IImages {
   imageUrl: string
   id: number
@@ -56,17 +57,19 @@ const PostManage = () => {
         <div className="mb-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {approved.map((post) => (
-              <div key={post.id} className="bg-white shadow-md rounded-lg overflow-hidden">
-                {post.images.length > 0 && (
-                  <img src={post.images[0].imageUrl} alt={post.name} className="w-full h-48 object-cover" />
-                )}
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold">{post.name}</h3>
-                  <p className="text-red-500 text-sm mb-2">{post.price} triệu/tháng</p>
-                  <p className="text-sm text-gray-600">{post.address}</p>
-                  <p className="text-sm text-gray-600">{post.description}</p>
+              <Link to={`/private/detail/${post.id}`}>
+                <div key={post.id} className="bg-white shadow-md rounded-lg overflow-hidden">
+                  {post.images.length > 0 && (
+                    <img src={post.images[0].imageUrl} alt={post.name} className="w-full h-48 object-cover" />
+                  )}
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold">{post.name}</h3>
+                    <p className="text-red-500 text-sm mb-2">{post.price} triệu/tháng</p>
+                    <p className="text-sm text-gray-600">{post.address}</p>
+                    <p className="text-sm text-gray-600">{post.description}</p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
