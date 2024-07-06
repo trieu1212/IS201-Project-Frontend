@@ -79,9 +79,27 @@ const Upload = () => {
     newUrls.splice(index, 1);
     setImageUrls(newUrls);
   };
-  const handleUpload = async () => {
-    if (postName === '' || description === '' || acreage === '' || roomType === '' || address === '' || serviceId === null || imageUrls.length === 0) {
+  const validateFields = () => {
+    if (!postName || !description || !acreage || !roomType || !address || serviceId === null || imageUrls.length === 0) {
       toast.error('Vui lòng điền đầy đủ thông tin')
+      return false
+    }
+    if (isNaN(Number(acreage)) || Number(acreage) <= 0) {
+      toast.error('Diện tích phải là một số dương')
+      return false
+    }
+    if (price !== null && (isNaN(price) || price <= 0)) {
+      toast.error('Giá phải là một số dương')
+      return false
+    }
+    if (!imageUrls.every(url => url.startsWith('http'))) {
+      toast.error('URL hình ảnh không hợp lệ')
+      return false
+    }
+    return true
+  }
+  const handleUpload = async () => {
+    if (!validateFields()) {
       return
     }
     else {

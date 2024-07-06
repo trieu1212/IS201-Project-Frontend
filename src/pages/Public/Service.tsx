@@ -58,9 +58,11 @@ const Service = () => {
                 <p className="text-gray-700">Mô tả: {service.description}</p>
                 <p className="text-gray-700">Giá dịch vụ: {service.price} triệu</p>
                 <p className="text-gray-700">Số lượng bài đăng của dịch vụ: {service.postAmount}</p>
+                <p>Thời hạn: {service.dateTime} ngày</p>
                 <span className={`${service.status ? 'text-yellow-500' : 'text-gray-500'} font-semibold`}>
                   {service.name == "Gói Vip" || service.name== "Gói Kim Cương" ? 'VIP' : 'Cơ bản'}
                 </span>
+                
               </div>
               <div>
                 <Button

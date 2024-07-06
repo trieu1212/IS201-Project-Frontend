@@ -72,6 +72,9 @@ const BuyService = () => {
     }
     getOneService()
   }, [id])
+  const today = new Date();
+  const dateStart = format(today, "dd-MM-yyyy");
+  const dateEnd = format(addDays(today, service?.dateTime || 0), "dd-MM-yyyy");
   return (
     <div className='flex w-full md:w-[1100px] py-2 mx-auto gap-4'>
       <div className='w-full md:w-[40%] h-auto flex flex-col gap-4 items-center border rounded-md shadow-lg py-4'>
@@ -81,11 +84,12 @@ const BuyService = () => {
           <p>Giá: {service?.price}</p>
           <p>Mô tả: {service?.description}</p>
           <p>Số ngày hiệu lực: {service?.dateTime} ngày</p>
+          <p>Ngày hiệu lực: Từ {dateStart} đến {dateEnd}</p>
           <p>Số bài đăng: {service?.postAmount}</p>
           <p>Trạng thái: {service?.status ? 'Đang hoạt động' : 'Ngừng hoạt động'}</p>
         </div>
       </div>
-      <div className='flex flex-col gap-4 border rounded-md shadow-lg py-4 px-6 w-full'>
+      <div className='flex flex-col gap-4 border rounded-md shadow-lg py-4 px-6 w-[60%]'>
         <h2 className='font-semibold text-[24px]'>Thông tin thanh toán</h2>
         <p>Tên người dùng: {user?.username}</p>
         <div className='flex items-center gap-16'>
